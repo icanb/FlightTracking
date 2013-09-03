@@ -11,6 +11,8 @@ class Flight(models.Model):
     flight_number = models.TextField(blank=True)
     date = models.DateTimeField(null=True, blank=True)
     from_val = models.TextField(blank=True)
+    destination = models.TextField(blank=True)
+    capacity = models.FloatField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     flyer = models.ForeignKey(
