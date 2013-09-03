@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Flight{% endblock %}
+
+{% block navbar %}
+<div class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/" id="brand-name">FlightTracking</a>
+    <ul class="nav" id="items">
+      {% if user.is_authenticated %}
+      <li class="logout-item pull-right"><a id="logout" href="{% url "django.contrib.auth.views.logout" %}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <!-- row -->
+    <div class="row hoff3">
+        <!-- column terminal -->
+        <div class=" hi3 span6 span6 offset3" style="; text-align: center">  <h1 class="node header-1">  Edit Flight
+          </h1>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff2">
+        <!-- column terminal -->
+        <form class="form-default hi12 span5 span5 offset4" action="{% url "webapp.form_receivers.edit_flight" flight.id %}" method="POST">  {% csrf_token %}
+              <label>  Flight Number
+              </label>
+              <input type="text" name="flight_number" value="{{ flight.flight_number }}">
+              <div class="form-error field-name-flight_number"></div>
+              <label>  Date
+              </label>
+              <div class="date-picker-wrapper">  <input class="date-picker-input" type="text" name="date">
+                <img class="date-picker-icon">
+              </div>
+              <div class="form-error field-name-date"></div>
+              <input class="btn" type="submit" value="Submit">
+              <div class="form-error field-all"></div>
+            </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <ul class="footer-links">
+    </ul>
+    <p class="footer-text muted">Powered by Appcubator</p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

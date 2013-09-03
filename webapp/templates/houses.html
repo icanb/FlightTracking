@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Houses{% endblock %}
+
+{% block navbar %}
+<div class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/" id="brand-name">OurBnb</a>
+    <ul class="nav" id="items">
+      {% if user.is_authenticated %}
+      <li class="logout-item pull-right"><a id="logout" href="{% url "django.contrib.auth.views.logout" %}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <!-- row -->
+    <div class="row hoff3">
+        <!-- column terminal -->
+        <form class="form-default hi13 span4 span4" action="{% url "webapp.form_receivers.create_house" %}" method="POST">  {% csrf_token %}
+          <label>  Address
+          </label>
+          <input type="text" placeholder="Address" name="address">
+          <div class="form-error field-name-address"></div>
+          <label>  Size
+          </label>
+          <input type="text" placeholder="Size" name="size">
+          <div class="form-error field-name-size"></div>
+          <input class="btn" type="submit" value="Add House">
+          <div class="form-error field-all"></div>
+        </form>
+        <!-- column terminal -->
+        <div class="defaul-list hi46 span7 span7 offset1" style="position:relative;">  {% for obj in houses %}
+          <div class="row" style="display:block; position:relative; height:150px;">  <p class="node normal-text" style="; position: absolute; height: 45px; width:400px; top: 0px; left: 95px; text-align:left ">  {{ obj.address }}
+            </p>
+            <p class="node normal-text" style="; position: absolute; height: 45px; width:400px; top: 45px; left: 95px; text-align:left ">  {{ obj.size }}
+            </p>
+          </div>
+          {% empty %}
+          <div style="display:block; position:relative; height:150px;">  List is empty.
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><a href="http://appcubator.com" class="menu-item">Powered by Appcubator</a></li>
+    </ul>
+    <p class="footer-text muted">Copyright 2013</p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

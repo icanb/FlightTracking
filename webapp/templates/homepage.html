@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block navbar %}
+<div class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/" id="brand-name">FlightTracking</a>
+    <ul class="nav" id="items">
+      <li><a href="{% url "webapp.pages.signup_page" %}">Signup Page</a></li>
+      <li><a href="{% url "webapp.pages.about_us" %}">About Us</a></li>
+      {% if user.is_authenticated %}
+      <li class="logout-item pull-right"><a id="logout" href="{% url "django.contrib.auth.views.logout" %}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <!-- row -->
+    <div class="row hoff4">
+        <!-- column terminal -->
+        <div class=" hi3 span4 span4 offset4" style="; text-align: center">  <h1 class="node header-light">  FlightTracking
+          </h1>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff2">
+        <!-- column terminal -->
+        <div class=" hi12 span4 span4 offset4" style="; text-align: center">  <form class="form-default" action="{% url "webapp.form_receivers.login" %}" method="POST">  {% csrf_token %}
+                <label>  Email or username
+                </label>
+                <input type="text" placeholder="Email or username" name="username">
+                <div class="form-error field-name-username"></div>
+                <label>  Password
+                </label>
+                <input type="password" placeholder="Password" name="password">
+                <div class="form-error field-name-password"></div>
+                <input class="btn" type="submit" value="Login">
+                <div class="form-error field-all"></div>
+              </form>
+            </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff1">
+        <!-- column terminal -->
+        <div class=" hi3 span4 span4 offset4" style="; text-align: center">  <div>  <a href="{% url "socialauth_begin" 'facebook' %}?next=/__facebook_social_auth_callback/%3Faction%3Dlogin" class="btn facebook-login-btn ">Login w/ Facebook</a>
+                  </div>
+                </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff1">
+        <!-- column terminal -->
+        <div class=" hi2 span4 span4 offset4">  <a class="node link-1" style="font-weight:bold; font-size:18px;" href="{% url "webapp.pages.signup_page" %}">  Or Signup here.
+                      </a>
+                    </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><a href="{% url "webapp.pages.homepage" %}" class="menu-item">Homepage</a></li>
+    </ul>
+    <p class="footer-text muted">Powered by Appcubator</p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

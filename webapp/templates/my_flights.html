@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}My Flights{% endblock %}
+
+{% block navbar %}
+<div class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/" id="brand-name">FlightTracking</a>
+    <ul class="nav" id="items">
+      {% if user.is_authenticated %}
+      <li class="logout-item pull-right"><a id="logout" href="{% url "django.contrib.auth.views.logout" %}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <!-- row -->
+    <div class="row hoff3">
+        <!-- column terminal -->
+        <div class=" hi3 span6 span6 offset3" style="; text-align: center">  <h1 class="node header-1">  My Flights
+          </h1>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff3">
+        <!-- column -->
+        <div class="span3">
+                <!-- row -->
+            <div class="row">
+                <!-- column terminal -->
+                <form class="form-default hi12 span3 span3" action="{% url "webapp.form_receivers.create_flight" %}" method="POST">  {% csrf_token %}
+                  <label>  Flight Number
+                  </label>
+                  <input type="text" placeholder="Flight Number" name="flight_number">
+                  <div class="form-error field-name-flight_number"></div>
+                  <label>  Date
+                  </label>
+                  <div class="date-picker-wrapper">  <input class="date-picker-input" type="text" name="date">
+                    <img class="date-picker-icon">
+                  </div>
+                  <div class="form-error field-name-date"></div>
+                  <input class="btn" type="submit" value="Submit">
+                  <div class="form-error field-all"></div>
+                </form>
+            </div>
+            <!-- row -->
+            <div class="row hoff1">
+                <!-- column terminal -->
+                <h1 class="node header-1 hi3 span3 span3" style="font-size:14px;">  Search for other people
+                    </h1>
+            </div>
+            <!-- row -->
+            <div class="row">
+                <!-- column terminal -->
+                <div class=" hi6 span3 span3">  <form class="search-box" action="{% url "webapp.pages.people" %}" method="get"><br>	<input name="query" type="text" placeholder="Search for User…"><br>	<input type="hidden" name="field_json" value="[]" /><br>	<input type="submit" class="btn" value="Search"><br></form>
+                        </div>
+            </div>
+        </div>
+        <!-- column terminal -->
+        <div class="default-list hi46 span7 span7 hoff1" style="position:relative;">  {% for obj in flights %}
+              <div class="row" style="display:block; position:relative; height:75px;">  <p class="node normal-text" style="; position: absolute; height: 31px; width:516px; top: 12px; left: 15px; text-align:left ">  {{ obj.flight_number }} - {{ obj.date }}
+                </p>
+                <div style="; position: absolute; height: 28px; width:148px; top: 49px; left: 383px; text-align:left ">  <a class="node blue-link" href="{% url "webapp.pages.edit_flight" obj.id %}">  Edit Flight >
+                  </a>
+                </div>
+              </div>
+              {% empty %}
+              <div style="display:block; position:relative; height:75px;">  List is empty.
+              </div>
+              {% endfor %}
+            </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <ul class="footer-links">
+    </ul>
+    <p class="footer-text muted">Powered by Appcubator</p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

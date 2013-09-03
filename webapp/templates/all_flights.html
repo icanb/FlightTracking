@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}All Flights{% endblock %}
+
+{% block navbar %}
+<div class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/" id="brand-name">FlightTracking</a>
+    <ul class="nav" id="items">
+      {% if user.is_authenticated %}
+      <li class="logout-item pull-right"><a id="logout" href="{% url "django.contrib.auth.views.logout" %}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <!-- row -->
+    <div class="row hoff3">
+        <!-- column terminal -->
+        <div class=" hi3 span6 span6 offset3" style="; text-align: center">  <h1 class="node header-1">  Welcome header!
+          </h1>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff1">
+        <!-- column terminal -->
+        <div class="default-list hi46 span7 span7 offset2" style="position:relative;">  {% for obj in flights %}
+              <div class="row" style="display:block; position:relative; height:75px;">  <p class="node normal-text" style="; position: absolute; height: 26px; width:400px; top: 0px; left: 95px; text-align:left ">  {{ obj.flight_number }}
+                </p>
+                <p class="node normal-text" style="; position: absolute; height: 29px; width:400px; top: 25px; left: 95px; text-align:left ">  {{ obj.date }}
+                </p>
+                <p class="node normal-text" style="; position: absolute; height: 30px; width:120px; top: 51px; left: 96px; text-align:left ">  {{ obj.flyer.username }}
+                </p>
+                <div style="; position: absolute; height: 39px; width:120px; top: 24px; left: 375px; text-align:left ">  <a class="node link-1" href="{% url "webapp.pages.homepage" %}">  Default Link...
+                  </a>
+                </div>
+              </div>
+              {% empty %}
+              <div style="display:block; position:relative; height:75px;">  List is empty.
+              </div>
+              {% endfor %}
+            </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <ul class="footer-links">
+    </ul>
+    <p class="footer-text muted">Powered by Appcubator</p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}People{% endblock %}
+
+{% block navbar %}
+<div class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/" id="brand-name">FlightTracking</a>
+    <ul class="nav" id="items">
+      {% if user.is_authenticated %}
+      <li class="logout-item pull-right"><a id="logout" href="{% url "django.contrib.auth.views.logout" %}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <!-- row -->
+    <div class="row hoff3">
+        <!-- column terminal -->
+        <div class=" hi3 span6 span6 offset3" style="; text-align: center">  <h1 class="node header-1">  People Using Flight Tracking
+          </h1>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff1">
+        <!-- column terminal -->
+        <div class=" hi7 span3 span3 hoff1">  <form class="search-box" action="{% url "webapp.pages.people" %}" method="get"><br>	<input name="query" type="text" placeholder="Search for User…"><br>	<input type="hidden" name="field_json" value="[]" /><br>	<input type="submit" class="btn" value="Search"><br></form>
+            </div>
+        <!-- column terminal -->
+        <div class="default-list hi46 span6 span6" style="position:relative;">  {% for obj in results %}
+              <div class="row" style="display:block; position:relative; height:180px;">  <p class="node normal-text" style="; position: absolute; height: 45px; width:400px; top: 0px; left: 95px; text-align:left ">  {{ obj.username }}
+                </p>
+                <p class="node normal-text" style="; position: absolute; height: 45px; width:400px; top: 45px; left: 95px; text-align:left ">  {{ obj.first_name }}
+                </p>
+                <p class="node normal-text" style="; position: absolute; height: 45px; width:400px; top: 90px; left: 95px; text-align:left ">  {{ obj.last_name }}
+                </p>
+                <p class="node normal-text" style="; position: absolute; height: 45px; width:400px; top: 135px; left: 95px; text-align:left ">  {{ obj.email }}
+                </p>
+                <div style="; position: absolute; height: 36px; width:120px; top: 8px; left: 324px; text-align:left ">  <a class="node blue-link" href="{% url "webapp.pages.profile_page" obj.id %}">  See profile >
+                  </a>
+                </div>
+              </div>
+              {% empty %}
+              <div style="display:block; position:relative; height:180px;">  List is empty.
+              </div>
+              {% endfor %}
+            </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><a href="http://appcubator.com" class="menu-item">Powered by Appcubator</a></li>
+    </ul>
+    <p class="footer-text muted">Copyright 2013</p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

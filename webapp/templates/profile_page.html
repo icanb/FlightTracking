@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Profile PAge{% endblock %}
+
+{% block navbar %}
+<div class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/" id="brand-name">FlightTracking</a>
+    <ul class="nav" id="items">
+      {% if user.is_authenticated %}
+      <li class="logout-item pull-right"><a id="logout" href="{% url "django.contrib.auth.views.logout" %}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <!-- row -->
+    <div class="row hoff3">
+        <!-- column terminal -->
+        <div class=" hi3 span10 span10 offset1" style="; text-align: center">  <h1 class="node header-1">  {{ user.first_name }}'s Flights
+          </h1>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row hoff1">
+        <!-- column terminal -->
+        <div class="default-list hi46 span6 span6 offset3" style="position:relative;">  {% for obj in flights %}
+              <div class="row" style="display:block; position:relative; height:150px;">  <p class="node normal-text" style="; position: absolute; height: 45px; width:385px; top: 0px; left: 95px; text-align:left ">  {{ obj.flight_number }}
+                </p>
+                <p class="node normal-text" style="; position: absolute; height: 45px; width:385px; top: 45px; left: 95px; text-align:left ">  {{ obj.date }}
+                </p>
+              </div>
+              {% empty %}
+              <div style="display:block; position:relative; height:150px;">  List is empty.
+              </div>
+              {% endfor %}
+            </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><a href="http://appcubator.com" class="menu-item">Powered by Appcubator</a></li>
+    </ul>
+    <p class="footer-text muted">Copyright 2013</p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
